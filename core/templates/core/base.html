@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Buen día, {{ request.user.first_name }}</h1>
+<h2>Próximas Citas</h2>
+<ul>
+    {% for cita in citas %}
+        <li>{{ cita.fecha_hora }} - {{ cita.paciente.nombre }}</li>
+    {% endfor %}
+</ul>
+<h2>Pacientes con actividad reciente</h2>
+<ul>
+    {% for paciente in pacientes_recientes %}
+        <li>{{ paciente.nombre }} - {{ paciente.detalles }}</li>
+    {% endfor %}
+</ul>
+{% endblock %} 

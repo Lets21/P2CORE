@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Registrar Síntomas Generales</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="sintomas" class="form-label">Síntomas</label>
+            <textarea id="sintomas" name="sintomas" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'lista_pacientes' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

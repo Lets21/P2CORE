@@ -3,6 +3,9 @@ from .models import Paciente, Cita, Doctor
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
+from .models import Sintoma, Enfermedad, Tratamiento, Doctor, Paciente, Prescripcion
+from .forms import SintomaForm
 
 
 
@@ -108,3 +111,22 @@ def doctores_view(request):
 
 def servicios_view(request):
     return render(request, 'core/servicios.html')
+
+def registrar_sintomas(request, paciente_id):
+    paciente = get_object_or_404(Paciente, id=paciente_id)
+    if request.method == "POST":
+        sintomas = request.POST.get('sintomas')
+        # Lógica para guardar los síntomas
+        # Por ejemplo, guardar en un modelo relacionado
+        paciente.detalles += f"\nSíntomas registrados: {sintomas}"
+        paciente.save()
+        return redirect('lista_pacientes')
+    return render(request, 'core/registrar_sintomas.html', {'paciente': paciente})
+
+def registrar_sintomas_general(request):
+    if request.method == "POST":
+        sintomas = request.POST.get('sintomas')
+        # Lógica para manejar los síntomas generales
+        # Por ejemplo, agregar un registro global
+        return redirect('lista_pacientes')
+    return render(request, 'core/registrar_sintomas_general.html')

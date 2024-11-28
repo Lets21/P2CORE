@@ -35,6 +35,7 @@
         <h1 class="mb-4">Listado de Pacientes</h1>
         <div class="d-flex justify-content-between mb-3">
             <a href="{% url 'agregar_paciente' %}" class="btn btn-success">Agregar Paciente</a>
+            <a href="{% url 'registrar_sintomas_general' %}" class="btn btn-primary">Registrar Síntomas</a>
         </div>
         <div class="filters mb-3">
             <a href="?enfermedad=crónica" class="btn btn-outline-primary">Enfermedad Crónica</a>
@@ -43,8 +44,11 @@
         </div>
         <ul class="list-group">
             {% for paciente in pacientes %}
-                <li class="list-group-item">
-                    <strong>{{ paciente.nombre }}</strong> - {{ paciente.detalles }}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ paciente.nombre }}</strong> - {{ paciente.detalles }}
+                    </div>
+                    <a href="{% url 'registrar_sintomas' paciente.id %}" class="btn btn-primary btn-sm">Registrar Síntomas</a>
                 </li>
             {% endfor %}
         </ul>
